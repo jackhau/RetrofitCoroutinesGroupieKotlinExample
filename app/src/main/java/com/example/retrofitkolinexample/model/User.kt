@@ -7,5 +7,6 @@ package com.example.retrofitkolinexample.model
 
 data class User(
     val id: Int? = null,
-    val name: String? = null
+    val name: String? = null,
+    val color: String? = null
 )

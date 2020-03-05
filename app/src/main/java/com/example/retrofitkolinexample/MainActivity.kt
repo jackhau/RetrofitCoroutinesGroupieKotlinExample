@@ -5,12 +5,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.retrofitkolinexample.databinding.ActivityMainBinding
+import com.example.retrofitkolinexample.item.UserItem
 import com.example.retrofitkolinexample.retrofit.Status
 import com.example.retrofitkolinexample.viewmodel.UserViewModel
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.Section
+import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityMainBinding
+    private val groupAdapter = GroupAdapter<GroupieViewHolder>()
+    private var mSection = Section()
+    private var updatableItem = ArrayList<UserItem>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,6 +29,10 @@ class MainActivity : AppCompatActivity() {
         userViewModel.getUserRepo.observe(this, Observer {
             when (it.status) {
                 Status.SUCCESS -> {
+                    it.data?.data?.forEach {data ->
+                        updatableItem.add(UserItem(data))
+                    }
+                    mSection.update(updatableItem)
                     mBinding.wording.text = "finish..."
                 }
                 Status.ERROR -> {
@@ -31,5 +43,11 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+
+        mBinding.recycleView.apply {
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            adapter = groupAdapter
+        }
+        groupAdapter.add(mSection)
     }
 }

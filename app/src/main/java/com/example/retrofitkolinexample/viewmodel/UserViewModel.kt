@@ -2,7 +2,9 @@ package com.example.retrofitkolinexample.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
+import com.example.retrofitkolinexample.model.User
 import com.example.retrofitkolinexample.repository.UserRepo
+import com.example.retrofitkolinexample.retrofit.Resource
 import kotlinx.coroutines.Dispatchers
 
 /**
@@ -11,9 +13,10 @@ import kotlinx.coroutines.Dispatchers
 
 class UserViewModel : ViewModel() {
     private val userRepo: UserRepo = UserRepo()
+    var user = User()
 
     val getUserRepo = liveData(Dispatchers.IO) {
-        val getUser = userRepo.getUserListData()
-        emit(getUser)
+        emit(Resource.loading(null))
+        emit(userRepo.getUserListData())
     }
 }
