@@ -10,13 +10,12 @@ import com.example.retrofitkolinexample.databinding.ActivityMainBinding
 import com.example.retrofitkolinexample.item.UserItem
 import com.example.retrofitkolinexample.retrofit.Status
 import com.example.retrofitkolinexample.viewmodel.UserViewModel
-import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.GroupieAdapter
 import com.xwray.groupie.Section
-import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityMainBinding
-    private val groupAdapter = GroupAdapter<GroupieViewHolder>()
+    private val groupAdapter = GroupieAdapter()
     private var mSection = Section()
     private var updatableItem = ArrayList<UserItem>()
 
