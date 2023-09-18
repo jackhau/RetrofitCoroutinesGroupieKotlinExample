@@ -23,4 +23,8 @@ class UserRepo {
             responseHandler.handleException(e)
         }
     }
+
+    suspend fun getUserName(): String {
+        return "Jack Hau"
+    }
 }

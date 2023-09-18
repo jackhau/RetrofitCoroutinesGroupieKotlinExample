@@ -19,4 +19,12 @@ class UserViewModel : ViewModel() {
         emit(Resource.loading(null))
         emit(userRepo.getUserListData())
     }
+
+    val getUserRepoWithLoading = liveData(Dispatchers.IO) {
+        emit(Resource.success(null))
+    }
+
+    val getUserName = liveData(Dispatchers.IO) {
+        emit(userRepo.getUserName())
+    }
 }
