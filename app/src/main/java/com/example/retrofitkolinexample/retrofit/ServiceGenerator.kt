@@ -1,6 +1,7 @@
 package com.example.retrofitkolinexample.retrofit
 
 import com.example.retrofitkolinexample.BuildConfig
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -13,6 +14,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ServiceGenerator {
     companion object {
         private val httpClient = OkHttpClient.Builder()
+
+        fun addNetworkInterceptor(interceptor: Interceptor) {
+            httpClient.addNetworkInterceptor(interceptor)
+        }
 
         fun createRetrofit(): TaskService {
             val client = httpClient.build()
